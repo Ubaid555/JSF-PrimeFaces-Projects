@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Letter Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            color: #2F4F4F;
+        }
+        .form-row {
+            margin: 10px 0;
+        }
+        .form-row label {
+            float: left;
+            width: 150px;
+            text-align: right;
+            margin-right: 10px;
+        }
+        .ui-inputtext, .ui-selectonemenu, .ui-calendar .ui-inputfield {
+            width: 150px;
+        }
+        .ui-inputtextarea {
+            width: 300px;
+        }
+        .cen {
+            width: 60%;
+            margin: auto;
+            border-top: 10px solid lightblue;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        form {
+            margin-left: 20px; /* Adjusted to center the form properly */
+            margin-bottom: 15px;
+        }
+        button.ui-button {
+            width: 25%;
+            margin-bottom: 5%;
+            margin-left: 60%; /* Adjusted to center the button properly */
+        }
+    </style>
+</h:head>
+<h:body>
+<div class="cen">
+    <h2 style="text-align: center;">Compose Letter</h2>
+    <h:form>
+        <div class="form-row">
+            <p:outputLabel for="from" value="From: "/>
+            <p:inputText id="from" value="#{letterBean.fromAddress}"/>
+            
+        </div>
+
+        <div class="form-row">
+            <p:outputLabel for="to" value="To: "/>
+            <p:inputText id="to" value="#{letterBean.recipient}"/>
+        </div>
+
+        <div class="form-row">
+            <p:outputLabel for="date" value="Date: "/>
+            <p:calendar id="date" value="#{letterBean.date}" pattern="MM/dd/yyyy" showButtonPanel="true"/>
+        </div>
+
+        <div class="form-row">
+            <p:outputLabel for="subject" value="Subject: "/>
+            <p:inputTextarea id="subject" rows="1" value="#{letterBean.subject}"/>
+        </div>
+
+        <div class="form-row">
+            <p:outputLabel for="body" value="Body: "/>
+            <p:inputTextarea id="body" rows="15" value="#{letterBean.body}"/>
+        </div>
+
+        <div class="form-row">
+            <p:outputLabel for="salutation" value="Closing Salutation: "/>
+            <p:selectOneMenu id="salutation" value="#{letterBean.salutation}">
+                <f:selectItem itemValue="Yours faithfully" itemLabel="Yours faithfully"/>
+                <f:selectItem itemValue="Yours sincerely" itemLabel="Yours sincerely"/>
+            </p:selectOneMenu>
+        </div>
+
+        <div class="form-row">
+            <p:outputLabel for="rank" value="Rank: "/>
+            <p:inputText id="rank" value="#{letterBean.rank}"/>
+        </div>
+        <!-- Changed type to "submit" -->
+        <p:commandButton type="submit" value="Send" action="#{letterBean.submitLetter()}"/>
+    </h:form>
+</div>
+</h:body>
+</html>
